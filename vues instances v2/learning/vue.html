@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <style>
+        .box {
+            background: green;
+            width: 300px;
+            height: 300px;
+        }
+
+        .circle {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .square {
+            width: 250px;
+            height: 250px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <comment-list :comments="comments" @submit-comment="addNewComment"></comment-list>
+    </div>
+
+    <div id="app" style="display: none;"><!-- TIRE O STYLE PARA VER AS ALTERACOES -->
+        <h1>LISSAO 1 BASICS</h1>
+        <h1>{{message}}</h1>
+        <h1>{{num}}</h1>
+        <h1>{{num * 5}}</h1>
+        <h4>{{(33/11) * 5}}</h4>
+        <h4>{{Math.random()}}</h4>
+        <h4>{{message.split("").reverse().join("")}}</h4>
+        <h1 v-text="message"></h1>
+        <a v-bind:href="link">Official Documentation</a>
+        <img v-bind:src="img" alt="">
+        <a :href="link">Official Documentation</a>
+        <img :src="img" alt="">
+    </div>
+
+    <div id="app" style="display: none;"><!-- TIRE O STYLE PARA VER AS ALTERACOES, PRECISA COLOCAR ELE ACIMA DOS QUE JA TEM STYLE NONE TBM-->
+        <h1>LISSAO 2 FUNCTIONS</h1>
+        <h3>{{counter}}</h3>
+        <button v-on:click="counter+=1">Counter increment</button>
+        <button v-on:click="incrementCounter">Counter increment function</button>
+        <button @click="counter+=1">Counter increment com @</button>
+        <div class="box" @mouseover="overTheBox"></div>
+    </div>
+
+    <div id="app" style="display: none;"><!-- TIRE O STYLE PARA VER AS ALTERACOES, PRECISA COLOCAR ELE ACIMA DOS QUE JA TEM STYLE NONE TBM-->
+        <h1 v-if="auth">Your User Profile</h1>
+        <h1 v-else>Please Login</h1>
+        
+        <h1>Product {{product}}</h1>
+        <h1 v-if="quantity >= 20">Avaiable</h1>
+        <h1 v-else-if="quantity > 0 && quantity < 20">Limited buying</h1>
+        <h1 v-else>Sold-Out!</h1>
+
+        <h3 v-show="sale">On sale</h3>
+    </div>
+
+    <div id="app" style="display: none;"><!-- TIRE O STYLE PARA VER AS ALTERACOES, PRECISA COLOCAR ELE ACIMA DOS QUE JA TEM STYLE NONE TBM-->
+        <div class="center">
+            <div class="circle" v-bind:class="{circle:flag,square:!flag}" v-bind:style="{backgroundColor:'green',border:'5px solid orange'}"></div>
+            <div class="circle" v-bind:class="{circle:flag,square:!flag}" v-bind:style="styleObject"></div>
+            <div v-bind:class="{circle:flag,square:!flag}" v-bind:style="styleObject"></div>
+        </div>
+        <div class="center">
+            <button @click="changeShape">Change Shape</button>
+        </div>
+    </div>
+
+    <div id="app" style="display: none;"><!-- TIRE O STYLE PARA VER AS ALTERACOES, PRECISA COLOCAR ELE ACIMA DOS QUE JA TEM STYLE NONE TBM-->
+        <div class="container">
+            <p>Method - 1: {{getRandomNumber()}}</p>
+            <p>Method - 2: {{getRandomNumber()}}</p>
+            <p>Method - 3: {{getRandomNumber()}}</p>
+            <hr>
+            <p>Computed - 1: {{getRandomComputed }}</p>
+            <p>Computed - 2: {{getRandomComputed }}</p>
+            <p>Computed - 3: {{getRandomComputed }}</p>
+            <hr>
+            <p>Full name {{fullName}}</p>
+            <hr>
+            <p>Reverse name {{reverseFullName}}</p>
+        </div>
+    </div>
+
+    <div id="app" style="display: none;"><!-- TIRE O STYLE PARA VER AS ALTERACOES, PRECISA COLOCAR ELE ACIMA DOS QUE JA TEM STYLE NONE TBM-->
+        <div class="container">
+            <h1>Users</h1>
+            <ul ><!-- PODE FAZER | v-for="(item, index) in users" :item="item" :key="index" | PARA PEGAR O INDEX TAMBEM -->
+                <li v-for="user in users">{{user}}</li>
+            </ul>
+
+            <h1>Numbers from 1 to 10</h1>
+            <ul >
+                <li v-for="number in 10">{{number}}</li>
+            </ul>
+
+            <h1>Users Dictionaries</h1>
+            <div v-for="user in usersDictionaries"
+            :key="user.id"><!-- :key para deixar a iteração melhorada na implementação e rastreamento dos dados -->
+                <p><strong>ID:</strong>{{user.id}}</p>
+                <p><strong>User:</strong>{{user.name}}</p>
+                <p><strong>Profession:</strong>{{user.profession}}</p>
+                <hr>
+            </div>
+        </div>
+    </div>
+
+    <div id="app" style="display: none;"><!-- TIRE O STYLE PARA VER AS ALTERACOES, PRECISA COLOCAR ELE ACIMA DOS QUE JA TEM STYLE NONE TBM-->
+        <div class="row justify-content-center mt-3">
+            <div class="circle" v-bind:style="{backgroundColor: color}"></div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <input type="text" v-model="color">
+        </div>
+        <div class="row justify-content-center mt-3">
+            <p>Color Data: {{color}}</p>
+        </div>
+
+        <div class="row justify-content-center mt-3">
+            <div class="col-5">
+                <p>Write a message</p>
+                <textarea name="" cols="60" rows="5" class="form-control" placeholder="Write something" v-model="text"></textarea>
+            </div>
+            <div class="col-5">
+                <p>Message</p>
+                <p>{{text}}</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-3">
+            <input type="checkbox" id="checkbox" v-model="checked">
+            <label for="checkbox">&nbsp;&nbsp;Value: {{checked}}</label>
+        </div>
+
+        <div class="row justify-content-center mt-3">
+            <select v-model="city">
+                <option>Rome</option>
+                <option>New York</option>
+                <option>Shenzen</option>
+                <option>London</option>
+                <option>Mumbai</option>
+            </select>
+            <span>&nbsp;&nbsp;City: {{city}}</span>
+        </div>
+    </div>
+
+    <div id="app" style="display: none;"><!-- TIRE O STYLE PARA VER AS ALTERACOES, PRECISA COLOCAR ELE ACIMA DOS QUE JA TEM STYLE NONE TBM-->
+        <p v-if="error" class="mt-2 text-center">{{error}}</p>
+        <div class="row justify-content-center mt-3">
+            <form @submit.prevent="onSubmit"><!--@submit.prevent PREVINI A PAGINA DE CARREGAR ATÉ O SUBMIT-->
+                <div class="form-group">
+                    <label for="comment-text">Publish comment</label>
+                    <textarea v-model="comment" class="form-control" id="comment-text" cols="80" rows="5" required></textarea>
+                    <button class="btn btn-sm btn-primary" type="submit">Publish</button>
+                </div>
+            </form>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-10">
+                <div class="card mt-1" v-for="comment in comentsForms">
+                    <div class="card-body">
+                        {{comment}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="app" style="display: none;"><!-- TIRE O STYLE PARA VER AS ALTERACOES, PRECISA COLOCAR ELE ACIMA DOS QUE JA TEM STYLE NONE TBM-->
+        <comment v-for="(comment,index) in comments" :comment="comment" :keys="index">
+        </comment>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

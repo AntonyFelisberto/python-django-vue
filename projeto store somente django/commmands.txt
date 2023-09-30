@@ -1,0 +1,16 @@
+pip install pillow
+pip install django
+
+django-admin startproject onlinestore
+
+pip freeze > requirements.txt
+
+python manage.py migrate
+python manage.py createsuperuser
+    user: artorias
+    password:artorias@00
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py runserver
