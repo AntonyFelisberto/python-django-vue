@@ -1,0 +1,20 @@
+python -m venv venv
+
+ctrl shift p = selecionar interpretador da venv
+
+pip install django
+pip install djangorestframework
+
+django-admin startproject newsapi
+
+python manage.py startapp news
+
+python manage.py migrate
+python manage.py createsuperuser
+    user: artorias
+    password:artorias@00
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py runserver
